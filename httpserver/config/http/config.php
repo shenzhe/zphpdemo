@@ -8,25 +8,24 @@ $config =  array(
     'ctrl_path' => 'ctrl',
     'project' => array(
         'log_path' => 'socket',
+        'static_url'=> 'http://hs.static.45117.com/',
+        'app_host'=> 'zchat.45117.com',
     ),
     'socket' => array(
         'host' => '0.0.0.0', //socket 监听ip
-        'port' => 8991, //socket 监听端口
+        'port' => 8992, //socket 监听端口
         'adapter' => 'Swoole', //socket 驱动模块
         'daemonize' => 1, //是否开启守护进程
-        'times' => array(
-            'hbcheck' => 66000 //心跳检测  单位ms
-        ), //定时服务
         'work_mode' => 3,
         'worker_num' => 5,
-        'client_class' => 'socket\\Swoole', //socket 回调类
+        'client_class' => 'ZPHP\\Socket\\Callback\\HttpServer', //socket 回调类
         'protocol' => 'Rpc', //socket通信数据协议
         'call_mode' => 'ROUTE', //业务处理模式
         'max_request' => 10000,
         'dispatch_mode' => 2,
     ),
 );
-$publicConfig = array('connection.php', 'cache.php', 'pdo.php');
+$publicConfig = array('cache.php', 'pdo.php');
 foreach($publicConfig as $file) {
     $file = ZPHP::getRootPath() . DS . 'config' . DS . 'public'. DS . $file;
     $config += include "{$file}";

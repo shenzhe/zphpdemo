@@ -37,15 +37,7 @@ class Swoole implements ICallback
 
     public function onStart()
     {
-
-        $params = func_get_args();
-        $serv = $params[0];
         echo 'server start, swoole version: ' . SWOOLE_VERSION . PHP_EOL;
-        if(!empty(ZConfig::getField('socket', 'times'))) {
-            foreach ($this->config['times'] as $time) {
-                $serv->addtimer($time);
-            }
-        }
     }
 
     public function onConnect()
@@ -198,7 +190,7 @@ class Swoole implements ICallback
         $serv = $params[0];
         $interval = $params[1];
         switch ($interval) {
-            case 66000: //heartbeat check
+            case 66: //heartbeat check
                 $this->hbcheck($serv);
                 break;
         }
