@@ -62,7 +62,7 @@ class Utils
 
     public static function makeUrl($action, $method, $params=array())
     {
-        $appUrl = ZConfig::getField('project', 'app_host', "");
+        $appUrl = $_SERVER['HTTP_HOST'];
         $actionName = ZConfig::getField('project', 'action_name', 'a');
         $methodName = ZConfig::getField('project', 'method_name', 'm');
         if(empty($appUrl)) {
