@@ -3,7 +3,7 @@ use ZPHP\ZPHP;
 define('NOW_TIME', time());
 $config =  array(
     'server_mode' => 'Socket',
-    'project_name' => 'zchat',
+    'project_name' => 'zhttp',
     'app_path' => 'apps',
     'ctrl_path' => 'ctrl',
     'project' => array(
