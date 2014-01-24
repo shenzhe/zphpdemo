@@ -25,7 +25,7 @@
     <div class="chat_send">
         <div class="col-lg-6">
             <div class="input-group">
-                <select class="form-control" id="sendTo">
+                <select class="form-control" id="sendTo" style="width:100px;">
                     <option value="0">全体</option>
                 </select>
                 <input type="text" id="msgContent" class="form-control">
