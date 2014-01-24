@@ -14,7 +14,7 @@ $config =  array(
         'app_host'=> $_SERVER['HTTP_HOST']
     ),
 );
-$publicConfig = array('pdo.php', 'cache.php', 'connection.php');
+$publicConfig = array('pdo.php', 'cache.php', 'connection.php', 'route.php');
 foreach($publicConfig as $file) {
     $file = ZPHP::getRootPath() . DS . 'config' . DS . 'public'. DS . $file;
     $config += include "{$file}";
