@@ -16,11 +16,11 @@
                 ),
             ),
             'dynamic' => array( //动态路由
-                '/^\/(\d+)\/(.*?)$/iU' => array(
+                '/^\/(\d+)\/(.*?)$/iU' => array(  //匹配 http://host/uid/token
                     'main\\main',
                     'main',
                     array('uid', 'token'),   //对应的参数名
-                    '/%uid%/%token%'        //返回格式
+                    '/{uid}/{token}'        //反向返回的格式
                 ),
             ),
         ),
