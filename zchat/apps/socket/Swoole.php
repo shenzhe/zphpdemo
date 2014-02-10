@@ -246,4 +246,14 @@ class Swoole implements ICallback
         $worker_id = $params[1];
         echo "WorkerStop[$worker_id]|pid=" . posix_getpid() . ".\n";
     }
+
+    public function onTask()
+    {
+
+    }
+
+    public function onFinish()
+    {
+        
+    }
 }

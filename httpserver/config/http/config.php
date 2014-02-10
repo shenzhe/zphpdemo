@@ -20,7 +20,7 @@ $config =  array(
         'worker_num' => 5,
         'client_class' => 'ZPHP\\Socket\\Callback\\HttpServer', //socket 回调类
         'protocol' => 'Rpc', //socket通信数据协议
-        'call_mode' => 'ROUTE', //业务处理模式
+        'call_mode' => 'ZPHP', //业务处理模式
         'max_request' => 10000,
         'dispatch_mode' => 2,
     ),

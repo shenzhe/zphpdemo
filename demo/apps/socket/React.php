@@ -97,7 +97,7 @@ class React implements ICallback
         $this->_data = $data;
     }
 
-    public function work()
+    public function onWorkerStart()
     {
         $server = Protocol\Factory::getInstance(Core\Config::getField('socket', 'protocol'));
         $queueService = ZQueue::getInstance(ZConfig::getField('queue', 'adapter'));
@@ -117,7 +117,7 @@ class React implements ICallback
                     ]);
                 }
             }
-            usleep(500);
+            usleep(1);
         }
     }
 
