@@ -57,4 +57,14 @@ class Sendbox implements ICallback
     public function onWorkerStop()
     {
     }
+
+    public function onTask()
+    {
+
+    }
+
+    public function onFinish()
+    {
+        
+    }
 }
