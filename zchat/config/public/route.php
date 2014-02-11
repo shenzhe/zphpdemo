@@ -14,7 +14,7 @@
                     'main\\main',
                     'savereg'
                 ),
-                'online'=>array(
+                '/online'=>array(
                     'chat\\main',
                     'online'
                 ),
