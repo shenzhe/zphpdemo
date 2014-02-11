@@ -24,6 +24,9 @@ class main extends Base
     public function online()
     {
         $olUids = common\Utils::online();
+        if(empty($olUids)) {
+            return array();
+        }
         $idsArr = \array_keys($olUids);
         $where = "id in (".implode(',', $idsArr).")";
         $userInfo = common\loadClass::getService('User')->fetchWhere($where);
