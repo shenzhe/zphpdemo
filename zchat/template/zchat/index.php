@@ -30,11 +30,12 @@
                 </select>
                 <input type="text" id="msgContent" class="form-control">
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button" id="sendBtn" onclick="sendMsg()">发言</button>
+        <button class="btn btn-default" type="button" id="sendBtn" onclick="sendMsg()">发言</button>(ctrl+enter发送)
       </span>
             </div><!-- /input-group -->
         </div><!-- /.col-lg-6 -->
     </div>
+    <div>协议自适应范例(socket和http自适应)：<a href="<?php echo \common\Utils::makeUrl('chat/main', 'online');?>" target='_blank'>web方式查看在线用户</a>)</div>
 
 
 </div> <!-- /container -->
