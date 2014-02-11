@@ -15,7 +15,7 @@
                     'savereg'
                 ),
                 'online'=>array(
-                    'main\\chat',
+                    'chat\\main',
                     'online'
                 ),
             ),
