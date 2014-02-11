@@ -8,5 +8,6 @@
             'dbname' => 'zchat',
             'charset' => 'UTF8',
             'pconnect'=>true,
+            'ping'=>1,
         )
     );

@@ -8,6 +8,7 @@ $config =  array(
     'ctrl_path' => 'ctrl',
     'project' => array(
         'log_path' => 'socket',
+        'keepalive' => 1,
     ),
     'socket' => array(
         'host' => '0.0.0.0', //socket 监听ip
