@@ -228,6 +228,8 @@ class Swoole implements ICallback
             $result =  Core\Route::route($server);
             return $result;
         } catch (\Exception $e) {
+            $result =  Formater::exception($e);
+            ZPHP\Common\Log::info('zchat', [var_export($result, true)]);
             return null;
         }
     }

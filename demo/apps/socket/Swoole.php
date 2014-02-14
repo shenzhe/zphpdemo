@@ -64,16 +64,16 @@ class Swoole implements ICallback
 
     public function onWorkerStart()
     {
-        $params = func_get_args();
-        $worker_id = $params[1];
-        echo "WorkerStart[$worker_id]|pid=" . posix_getpid() . ".\n";
+        //$params = func_get_args();
+        //$worker_id = $params[1];
+        //echo "WorkerStart[$worker_id]|pid=" . posix_getpid() . ".\n";
     }
 
     public function onWorkerStop()
     {
-        $params = func_get_args();
-        $worker_id = $params[1];
-        echo "WorkerStop[$worker_id]|pid=" . posix_getpid() . ".\n";
+        //$params = func_get_args();
+        //$worker_id = $params[1];
+        //echo "WorkerStop[$worker_id]|pid=" . posix_getpid() . ".\n";
     }
 
     private function route($server)
@@ -84,6 +84,16 @@ class Swoole implements ICallback
             $server->display($e->getMessage());
         }
         return $server;
+    }
+
+    public function onTask()
+    {
+
+    }
+
+    public function onFinish()
+    {
+
     }
 
 }
