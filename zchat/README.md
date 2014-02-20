@@ -30,7 +30,7 @@ demo地址：
 
 3) php zchat/webroot/main.php socket    //zchat socket服务
 
-4) 运行cache,conn两个redis服务 (config/public目录下cache和conn上相对应的配置)
+4) cache,conn需要redis支持 (可根据你启动的redis的host的port去更改config/public目录下cache.php和conn.php上相对应的配置)
 
 5）导入database下的sql         (config/public目录下pdo是相对应的配置)
 
