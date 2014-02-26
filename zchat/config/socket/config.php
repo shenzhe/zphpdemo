@@ -14,11 +14,10 @@ $config =  array(
         'port' => 8991, //socket 监听端口
         'adapter' => 'Swoole', //socket 驱动模块
         'daemonize' => 1, //是否开启守护进程
-        'times' => array(
-            'hbcheck' => 66000 //心跳检测  单位ms
-        ), //定时服务
+        'heartbeat_check_interval' => 30, //每隔 30s 会做一次心跳检测, 需swoole 1.6.11版支持
+        'heartbeat_idle_time' => 35,      //fd最后一次通信时间超过 35s，会被close
         'work_mode' => 3,
-        'worker_num' => 5,
+        'worker_num' => 2,
         'client_class' => 'socket\\Swoole', //socket 回调类
         'protocol' => 'Rpc', //socket通信数据协议
         'call_mode' => 'ROUTE', //业务处理模式
