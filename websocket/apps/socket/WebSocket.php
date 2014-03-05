@@ -11,20 +11,20 @@ class WebSocket extends WSServer
     /**
     * 下线时，通知所有人
     */
-    public function onOffline( $serv, $client_id, $from_id )
+    public function onOffline( $serv, $fd, $from_id )
     {
         $resMsg = array(
             'cmd' => 'offline',
-            'fd' => $client_id,
+            'fd' => $fd,
             'from' => 0,
             'channal' => 0 ,
-            'data' => $this->connections[$client_id]['name']."下线了。。",
+            'data' => $this->connections[$fd]['name']."下线了。。",
         );
         //将下线消息发送给所有人
-        $this->log("onOffline: ".$client_id );
+        $this->log("onOffline: ".$fd );
         foreach ( $this->connections as $clid => $info )
         {
-            if( $client_id != $clid )
+            if( $fd != $clid )
             {
                 $this->send( $clid , json_encode( $resMsg ) );
             }
@@ -34,25 +34,25 @@ class WebSocket extends WSServer
 
     /**
     * 接收到消息时
-    * @see WSProtocol::onMessage()
+    * @see WSProtocol::onSend()
     */
-    public function onMessage($client_id, $ws)
+    public function onSend($fd, $ws)
     {
-        $this->log("onMessage: ".$ws['message']);
+        $this->log("onSend: ".$ws['message']);
         $msg = json_decode( $ws['message'] , true );
         if( $msg['cmd'] == 'login' )
         {
-            $this->connections[$client_id]['name'] = $msg['name'];
-            $this->connections[$client_id]['avatar'] = $msg['avatar'];
+            $this->connections[$fd]['name'] = $msg['name'];
+            $this->connections[$fd]['avatar'] = $msg['avatar'];
 
             //回复给登录用户
             $resMsg = array(
                 'cmd' => 'login',
-                'fd' => $client_id,
+                'fd' => $fd,
                 'name' => $msg['name'],
                 'avatar' => $msg['avatar'],
             );
-            $this->send( $client_id , json_encode( $resMsg ) );
+            $this->send( $fd , json_encode( $resMsg ) );
 
             //广播给其它在线用户
             $resMsg['cmd'] = 'newUser';
@@ -67,7 +67,7 @@ class WebSocket extends WSServer
             //将上线消息发送给所有人
             foreach ( $this->connections as $clid => $info )
             {
-                if( $client_id != $clid )
+                if( $fd != $clid )
                 {
                     $this->send( $clid , json_encode( $resMsg ) );
                     $this->send( $clid , json_encode( $loginMsg ) );
@@ -90,7 +90,7 @@ class WebSocket extends WSServer
                 'avatar' => $info['avatar'],
                 );
             }
-            $this->send( $client_id , json_encode( $resMsg ) );
+            $this->send( $fd , json_encode( $resMsg ) );
         }
             /**
             * 发送信息请求
