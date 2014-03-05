@@ -18,11 +18,11 @@ class WebSocket extends WSServer
             'fd' => $fd,
             'from' => 0,
             'channal' => 0 ,
-            'data' => $this->connections[$fd]['name']."下线了。。",
+            'data' => $this->_ws[$fd]['name']."下线了。。",
         );
         //将下线消息发送给所有人
         $this->log("onOffline: ".$fd );
-        foreach ( $this->connections as $clid => $info )
+        foreach ( $this->_ws as $clid => $info )
         {
             if( $fd != $clid )
             {
@@ -42,8 +42,8 @@ class WebSocket extends WSServer
         $msg = json_decode( $ws['message'] , true );
         if( $msg['cmd'] == 'login' )
         {
-            $this->connections[$fd]['name'] = $msg['name'];
-            $this->connections[$fd]['avatar'] = $msg['avatar'];
+            $this->_ws[$fd]['name'] = $msg['name'];
+            $this->_ws[$fd]['avatar'] = $msg['avatar'];
 
             //回复给登录用户
             $resMsg = array(
@@ -65,7 +65,7 @@ class WebSocket extends WSServer
             );
 
             //将上线消息发送给所有人
-            foreach ( $this->connections as $clid => $info )
+            foreach ( $this->_ws as $clid => $info )
             {
                 if( $fd != $clid )
                 {
@@ -82,7 +82,7 @@ class WebSocket extends WSServer
             $resMsg = array(
                 'cmd' => 'getOnline',
             );
-            foreach ( $this->connections as $clid => $info )
+            foreach ( $this->_ws as $clid => $info )
             {
                 $resMsg['list'][] = array(
                 'fd' => $clid,
@@ -103,7 +103,7 @@ class WebSocket extends WSServer
             //表示群发
             if( $msg['channal'] == 0 )
             {
-            foreach ( $this->connections as $clid => $info )
+            foreach ( $this->_ws as $clid => $info )
             {
             $this->send( $clid , json_encode( $resMsg ) );  
             }
