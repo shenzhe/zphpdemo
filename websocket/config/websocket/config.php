@@ -22,6 +22,8 @@ $config =  array(
         'call_mode' => 'ZPHP', //业务处理模式
         'max_request' => 10000,
         'dispatch_mode' => 2,
+        'heartbeat_idle_time'=>600,
+        'heartbeat_check_interval'=>610,
     ),
 );
 $publicConfig = array('cache.php', 'pdo.php');
