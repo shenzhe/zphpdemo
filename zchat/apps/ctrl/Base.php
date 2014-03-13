@@ -34,6 +34,7 @@ class Base implements IController
 
     public function _after()
     {
+        common\loadClass::getDao('User')->closeDb();
     }
 
     public function getParams()
