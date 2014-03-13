@@ -21,7 +21,7 @@ $config =  array(
         'client_class' => 'socket\\Swoole', //socket 回调类
         'protocol' => 'Rpc', //socket通信数据协议
         'call_mode' => 'ROUTE', //业务处理模式
-        'max_request' => 10000,
+        'max_request' => 0,
         'dispatch_mode' => 2,
     ),
 );
