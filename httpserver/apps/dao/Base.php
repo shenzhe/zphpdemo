@@ -21,6 +21,8 @@ abstract class Base
             $config = ZConfig::get('pdo');
             $this->_db = new ZPdo($config, $this->entity, $config['dbname']);
             $this->_db->setClassName($this->entity);
+        } else {
+            $this->_db->checkPing();
         }
         return $this->_db;
     }

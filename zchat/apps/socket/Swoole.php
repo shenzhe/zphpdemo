@@ -41,7 +41,8 @@ class Swoole implements ICallback
         $params = func_get_args();
         $serv = $params[0];
         echo 'server start, swoole version: ' . SWOOLE_VERSION . PHP_EOL;
-        if(!empty($times = ZConfig::getField('socket', 'times'))) {
+        $times = ZConfig::getField('socket', 'times');
+        if(!empty($times)) {
             foreach ($times as $time) {
                 $serv->addtimer($time);
             }
