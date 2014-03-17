@@ -17,7 +17,7 @@ class HttpServer extends ZHttpServer
         $mime = 'text/html';
         if (is_file($filePath)) {
             $result = file_get_contents($filePath);
-            $mime = $this->getMimes($filePath);
+            $mime = $this->getMime($filePath);
         } else {
             $result = $this->route($data, $fd);
         }
