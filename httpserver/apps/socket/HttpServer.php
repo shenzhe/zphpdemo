@@ -8,7 +8,7 @@ use ZPHP\Core\Config as ZConfig;
 class HttpServer extends ZHttpServer
 {
 
-    private _route;
+    private $_route;
 
     public function onSend($fd, $data)
     {
