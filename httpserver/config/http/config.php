@@ -8,7 +8,7 @@ $config =  array(
     'ctrl_path' => 'ctrl',
     'project' => array(
         'log_path' => 'socket',
-        'static_url'=> 'http://web.zphp.45117.com/',
+        'static_url'=> 'http://web.zphp.45117.com:8992/static/',
         'app_host'=> 'web.zphp.45117.com',
     ),
     'socket' => array(

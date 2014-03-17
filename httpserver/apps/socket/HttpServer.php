@@ -14,8 +14,8 @@ class HttpServer extends ZHttpServer
     {
         $pathInfo = $_SERVER['PATH_INFO'];
         $filePath = \ZPHP\ZPHP::getRootPath(). DS. ZConfig::getField('project', 'webroot', 'webroot') . $pathInfo;
-        if (is_file($pathInfo)) {
-            $result = file_get_contents($pathInfo);
+        if (is_file($filePath)) {
+            $result = file_get_contents($filePath);
         } else {
             $result = $this->route($data, $fd);
         }
