@@ -14,22 +14,24 @@ class HttpServer extends ZHttpServer
     {
         $pathInfo = $_SERVER['PATH_INFO'];
         $filePath = \ZPHP\ZPHP::getRootPath(). DS. ZConfig::getField('project', 'webroot', 'webroot') . $pathInfo;
+        $mime = 'text/html';
         if (is_file($filePath)) {
             $result = file_get_contents($filePath);
+            $mime = $this->getMimes($filePath);
         } else {
             $result = $this->route($data, $fd);
         }
-        $this->sendTo($fd, $result);
+        $this->sendTo($fd, $result, $mime);
     }
 
-    private function sendTo($fd, $data)
+    private function sendTo($fd, $data, $mime='text/html')
     {
         $keepalive = ZConfig::getField('project', 'keepalive', 1);
         $response = join(
             "\r\n",
             array(
                 'HTTP/1.1 200 OK',
-                'Content-Type: text/html; charset=utf-8',
+                'Content-Type: '.$mime.'; charset=utf-8',
                 'Connection: '.$keepalive ? 'keep-alive' : 'Close',
                 'Server:zserver 0.1',
                 'Content-Length: '.strlen($data),
