@@ -12,7 +12,7 @@ class HttpServer extends ZHttpServer
 
     public function onSend($fd, $data)
     {
-        $result = $this->route($data);
+        $result = $this->route($data, $fd);
         $this->sendTo($fd, $result);
     }
 
@@ -37,13 +37,13 @@ class HttpServer extends ZHttpServer
         }
     }
 
-    private function route($data)
+    private function route($data, $fd)
     {
         if(empty($this->_route)) {
             $this->_route = Route::getInstance(ZConfig::getField('socket', 'call_mode', 'ZPHP'));
         }
         try {
-            return $this->_route->run($data);
+            return $this->_route->run($data, $fd);
         } catch (\Exception $e) {
             //$result =  Formater::exception($e);
             return null;
