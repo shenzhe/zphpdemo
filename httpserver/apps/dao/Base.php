@@ -27,6 +27,13 @@ abstract class Base
         return $this->_db;
     }
 
+    public function closeDb()
+    {
+        if(!empty($this->_db)) {
+            $this->_db->close();
+        }
+    }
+
     public function fetchById($id)
     {
         $this->useDb();
