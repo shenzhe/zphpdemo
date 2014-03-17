@@ -8,8 +8,8 @@ $config =  array(
     'ctrl_path' => 'ctrl',
     'project' => array(
         'log_path' => 'socket',
-        'static_url'=> 'http://hs.static.45117.com/',
-        'app_host'=> 'zchat.45117.com',
+        'static_url'=> 'http://web.zphp.45117.com/',
+        'app_host'=> 'web.zphp.45117.com',
     ),
     'socket' => array(
         'host' => '0.0.0.0', //socket 监听ip

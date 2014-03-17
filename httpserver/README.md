@@ -14,9 +14,13 @@ zhttpserver Demo运行：
 	https://github.com/matyhtf/php-webserver/tree/master/ext   //用来解析http 
 	https://github.com/laruence/yac                            //共享，如果采用fd按模分配，可不用此扩展，config/public/cache.php里的Yac改成Php
 
+
 线上demo地址
 ====
 
-	http://zchat.45117.com:8992
+	http://web.zphp.45117.com:8992
 
 
+本地测试
+=========
+把web.zphp.45117.com 绑定到 测试机的ip上
