@@ -13,7 +13,7 @@ class HttpServer extends ZHttpServer
     public function onSend($fd, $data)
     {
         $pathInfo = $_SERVER['PATH_INFO'];
-        if (is_file(ZPHP\ZPHP::getRootPath().$pathInfo)) {
+        if (is_file(\ZPHP\ZPHP::getRootPath().$pathInfo)) {
             $result = file_get_contents(ZPHP\ZPHP::getRootPath().$pathInfo);
         } else {
             $result = $this->route($data, $fd);
