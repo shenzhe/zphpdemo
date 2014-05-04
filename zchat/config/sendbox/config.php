@@ -10,7 +10,7 @@ return array(
         'port' => 843, //socket 监听端口
         'adapter' => 'Swoole', //socket 驱动模块
         'daemonize' => 1, //是否开启守护进程
-        'work_mode' => 1,
+        'work_mode' => 3,
         'worker_num' => 2,
         'client_class' => 'socket\\Sendbox', //socket 回调类
         'protocol' => 'Json', //socket通信数据协议
