@@ -8,8 +8,7 @@ $config =  array(
     'ctrl_path' => 'ctrl',
     'project' => array(
         'log_path' => 'http',
-        'default_ctrl_name'=>'main',
-        'tpl_path' => ZPHP::getRootPath(). DS.'template'. DS . PROJECT_NAME.DS
+        'default_ctrl_name'=>'main'
     ),
 );
 return $config;
