@@ -20,8 +20,8 @@ if(!function_exists('is_mobile'))
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 	   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png"/>
 		<meta property="fb:app_id" content="149260988448984" />
-		<meta name="title" content="Workerman-todpole!" />
-		<meta name="description" content="workerman + HTML5+WebSocket +PHP socket 广播 小蝌蚪交互游戏程序 ，坐标实时推送、实时聊天等" />
+		<meta name="title" content="zphp-todpole!" />
+		<meta name="description" content="zphp + HTML5+WebSocket +PHP socket 广播 小蝌蚪交互游戏程序 ，坐标实时推送、实时聊天等" />
 		<link rel="image_src" href="/images/fb-image.jpg" / >
 	</head>
 	<body>
@@ -32,7 +32,7 @@ if(!function_exists('is_mobile'))
 		
 			<input id="chat" type="text" />
 			<div id="chatText"></div>
-			<h1>workerman</h1>
+			<h1>zphp</h1>
 		<?php if(!is_mobile()){?>
 			<div id="instructions">
 				<h2>介绍</h2>
@@ -40,11 +40,11 @@ if(!function_exists('is_mobile'))
 			</div>
 			<aside id="info">
 			<section id="share">
-				       <a rel="external" href="http://github.com/shenzhe/zphpdemo" title="workerman-todpole at GitHub">源代码：<img src="css/images/github.png" alt="fork on github"></a>
+				       <a rel="external" href="http://github.com/shenzhe/zphpdemo" title="zphp-todpole at GitHub">源代码：<img src="css/images/github.png" alt="fork on github"></a>
 				       &nbsp;&nbsp;
 			</section>
 			<section id="wtf">
-				<h2>powered&nbsp;by&nbsp;<a rel="external" href="http://www.swoole.com" target="_blank">workerman</a> &nbsp;&nbsp;&nbsp;&nbsp;感谢<a href="http://rumpetroll.com/" target="_blank">rumpetroll.com</a>提供的界面</h2>
+				<h2>powered&nbsp;by&nbsp;<a rel="external" href="http://www.swoole.com" target="_blank">zphp</a> &nbsp;&nbsp;&nbsp;&nbsp;感谢<a href="http://rumpetroll.com/" target="_blank">rumpetroll.com</a>提供的界面</h2>
 			</section>
 			</aside>
 			<?php }?>
