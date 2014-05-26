@@ -9,7 +9,7 @@ $config =  array(
     'project' => array(
         'log_path' => 'http',
         'static_url' => '/static/',
-        'tpl_path'=> ZPHP\ZPHP::getRootPath() . DS  . 'template'. DS .'zchat',
+        'tpl_path'=> ZPHP::getRootPath() . DS  . 'template'. DS .'zchat',
         'view_mode'=> 'Json',
         'app_host'=> $_SERVER['HTTP_HOST']
     ),
