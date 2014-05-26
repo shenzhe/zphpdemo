@@ -10,6 +10,7 @@ $config =  array(
         'log_path' => 'socket',
         'static_url'=> 'http://web.zphp.45117.com:8992/static/',
         'app_host'=> 'web.zphp.45117.com',
+        'tpl_path'=> ZPHP::getRootPath() . DS  . 'template'. DS . 'template' . DS,
     ),
     'socket' => array(
         'host' => '0.0.0.0', //socket 监听ip
