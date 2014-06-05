@@ -8,10 +8,20 @@ use ZPHP\Core\Config as ZConfig;
 class WebSocket extends WSServer
 {
 
+    public function wsOnOpen($fd) 
+    {
+        //echo "{$fd} connect success";
+    }
+
+    public function wsOnClose($fd)
+    {
+        $this->onOffline($fd);
+    }
+
     /**
     * 下线时，通知所有人
     */
-    public function onOffline( $serv, $fd, $from_id )
+    public function onOffline( $fd, $from_id=0 )
     {
         $resMsg = array(
             'cmd' => 'offline',
@@ -36,7 +46,7 @@ class WebSocket extends WSServer
     * 接收到消息时
     * @see WSProtocol::onSend()
     */
-    public function onSend($fd, $ws)
+    public function wsOnMessage($fd, $ws)
     {
         $this->log("onSend: ".$ws['message']);
         $msg = json_decode( $ws['message'] , true );
