@@ -20,10 +20,10 @@ $config =  array(
         'client_class' => 'socket\\WebSocket', //socket 回调类
         'protocol' => 'Rpc', //socket通信数据协议
         'call_mode' => 'ZPHP', //业务处理模式
-        'max_request' => 10000,
+        'max_request' => 0,
         'dispatch_mode' => 2,
-        'heartbeat_idle_time'=>600,
-        'heartbeat_check_interval'=>610,
+        'heartbeat_idle_time'=>60,
+        'heartbeat_check_interval'=>65,
     ),
 );
 $publicConfig = array('cache.php');

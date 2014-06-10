@@ -8,9 +8,10 @@ use ZPHP\Core\Config as ZConfig;
 class WebSocket extends WSServer
 {
 
-    public function wsOnOpen($fd) 
+    public function wsOnOpen($fd, $data) 
     {
         //echo "{$fd} connect success";
+        $this->send($fd, $data);
     }
 
     public function wsOnClose($fd)

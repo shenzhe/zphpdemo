@@ -7,28 +7,34 @@ use ZPHP\Core\Config as ZConfig;
 
 class WebSocket extends WSServer
 {
-
-    /**
-    * 下线时，通知所有人
-    */
-    public function onOffline( $serv, $fd, $from_id )
+    public function wsOnOpen($fd, $data) 
     {
-        $resMsg = array(
-            'cmd' => 'offline',
-            'fd' => $fd,
-            'from' => 0,
-            'channal' => 0 ,
-            'data' => $this->_ws[$fd]['name']."下线了。。",
-        );
-        //将下线消息发送给所有人
-        $this->log("onOffline: ".$fd );
+        echo "{$fd} connect success";
+        $uid = (substr(strval(microtime(true)), 6, 7)*100)%1000000;
+           if($uid<100000)
+           {
+               $uid += 100000; 
+           }
+           $this->send($fd, $data.pack("H*", '811e').'{"type":"welcome","id":'.$uid.'}', self::OPCODE_BINARY_FRAME);
+           $this->_ws[$fd]['uid'] = $uid;
+    }
+
+    public function wsOnClose($fd)
+    {
+        $this->sendAll($fd, json_encode(array('type'=>'closed', 'id'=>$this->_ws[$fd]['uid'])));
+    }
+
+    
+    public function sendAll($fd, $data)
+    {
         foreach ( $this->_ws as $clid => $info )
         {
-            if( $fd != $clid )
-            {
-                $this->send( $clid , json_encode( $resMsg ) );
-            }
+            //if( $fd != $clid )
+            //{
+                $this->send( $clid , $data);
+            //}
         }
+        
     }
 
 
@@ -36,85 +42,43 @@ class WebSocket extends WSServer
     * 接收到消息时
     * @see WSProtocol::onSend()
     */
-    public function onSend($fd, $ws)
+    public function wsOnMessage($fd, $ws)
     {
         $this->log("onSend: ".$ws['message']);
-        $msg = json_decode( $ws['message'] , true );
-        if( $msg['cmd'] == 'login' )
+        $message_data = json_decode( $ws['message'] , true );
+        if(!$message_data)
         {
-            $this->_ws[$fd]['name'] = $msg['name'];
-            $this->_ws[$fd]['avatar'] = $msg['avatar'];
-
-            //回复给登录用户
-            $resMsg = array(
-                'cmd' => 'login',
-                'fd' => $fd,
-                'name' => $msg['name'],
-                'avatar' => $msg['avatar'],
-            );
-            $this->send( $fd , json_encode( $resMsg ) );
-
-            //广播给其它在线用户
-            $resMsg['cmd'] = 'newUser';
-
-            $loginMsg = array(
-                'cmd' => 'fromMsg',
-                'from' => 0,
-                'channal' => 0 ,
-                'data' => $msg['name']."上线鸟。。",
-            );
-
-            //将上线消息发送给所有人
-            foreach ( $this->_ws as $clid => $info )
-            {
-                if( $fd != $clid )
-                {
-                    $this->send( $clid , json_encode( $resMsg ) );
-                    $this->send( $clid , json_encode( $loginMsg ) );
-                }
-            }
+            return ;
         }
-        /**
-        * 获取在线列表
-        */
-        elseif ( $msg['cmd'] == 'getOnline' )
+        
+        switch($message_data['type'])
         {
-            $resMsg = array(
-                'cmd' => 'getOnline',
-            );
-            foreach ( $this->_ws as $clid => $info )
-            {
-                $resMsg['list'][] = array(
-                'fd' => $clid,
-                'name' => $info['name'],
-                'avatar' => $info['avatar'],
+            // 更新用户
+            case 'update':
+                // 转播给所有用户
+                $this->sendAll($fd, json_encode(
+                        array(
+                                'type'     => 'update',
+                                'id'         => $this->_ws[$fd]['uid'],
+                                'angle'   => $message_data["angle"]+0,
+                                'momentum' => $message_data["momentum"]+0,
+                                'x'                   => $message_data["x"]+0,
+                                'y'                   => $message_data["y"]+0,
+                                'life'                => 1,
+                                'name'           => isset($message_data['name']) ? $message_data['name'] : 'Guest.'.$this->_ws[$fd]['uid'],
+                                'authorized'  => false,
+                                )
+                        ));
+                return;
+            // 聊天
+            case 'message':
+                // 向大家说
+                $new_message = array(
+                    'type'=>'message', 
+                    'id'=>$this->_ws[$fd]['uid'],
+                    'message'=>$message_data['message'],
                 );
-            }
-            $this->send( $fd , json_encode( $resMsg ) );
-        }
-            /**
-            * 发送信息请求
-            */
-        elseif( $msg['cmd'] == 'message' )
-        {
-            $resMsg = $msg;
-            $resMsg['cmd'] = 'fromMsg';
-
-            //表示群发
-            if( $msg['channal'] == 0 )
-            {
-            foreach ( $this->_ws as $clid => $info )
-            {
-            $this->send( $clid , json_encode( $resMsg ) );  
-            }
-
-            }
-            //表示私聊
-            elseif ( $msg['channal'] == 1 )
-            {
-            $this->send( $msg['to'] , json_encode( $resMsg ) );
-            $this->send( $msg['from'] , json_encode( $resMsg ) );
-            }
+                return $this->sendAll($fd, json_encode($new_message));
         }
     }
 
