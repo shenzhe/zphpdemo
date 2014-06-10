@@ -13,15 +13,15 @@ if(!function_exists('is_mobile'))
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>zphp小蝌蚪互动聊天室</title>
+		<title>zphp + swoole小蝌蚪互动聊天室</title>
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
 		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=0;" />		
     <meta name="apple-mobile-web-app-capable" content="YES">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 	   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png"/>
 		<meta property="fb:app_id" content="149260988448984" />
-		<meta name="title" content="zphp-todpole!" />
-		<meta name="description" content="zphp + HTML5+WebSocket +PHP socket 广播 小蝌蚪交互游戏程序 ，坐标实时推送、实时聊天等" />
+		<meta name="title" content="zphp-swoole-todpole!" />
+		<meta name="description" content="zphp+swoole + HTML5+WebSocket +PHP socket 广播 小蝌蚪交互游戏程序 ，坐标实时推送、实时聊天等" />
 		<link rel="image_src" href="/images/fb-image.jpg" / >
 	</head>
 	<body>
@@ -44,7 +44,7 @@ if(!function_exists('is_mobile'))
 				       &nbsp;&nbsp;
 			</section>
 			<section id="wtf">
-				<h2>powered&nbsp;by&nbsp;<a rel="external" href="http://www.swoole.com" target="_blank">zphp</a> &nbsp;&nbsp;&nbsp;&nbsp;感谢<a href="http://rumpetroll.com/" target="_blank">rumpetroll.com</a>提供的界面</h2>
+				<h2>powered&nbsp;by&nbsp;<a rel="external" href="http://www.swoole.com" target="_blank">zphp+swoole</a> &nbsp;&nbsp;&nbsp;&nbsp;感谢<a href="http://rumpetroll.com/" target="_blank">rumpetroll.com</a>提供的界面</h2>
 			</section>
 			</aside>
 			<?php }?>
