@@ -1,7 +1,7 @@
 <?php
     return array(
         'connection'=>array(
-            'adapter' => 'Redis',
+            'adapter' => 'Php',
             'name' => 'cr',
             'pconnect' => true,
             'host' => '127.0.0.1',
