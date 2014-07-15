@@ -2,7 +2,7 @@
 use ZPHP\ZPHP;
 $config =  array(
     'server_mode' => 'Socket',
-    'project_name' => 'zwebsocket',
+    'project_name' => 'zphpdemo-todpole',
     'app_path' => 'apps',
     'ctrl_path' => 'ctrl',
     'project' => array(
@@ -22,8 +22,8 @@ $config =  array(
         'call_mode' => 'ZPHP', //业务处理模式
         'max_request' => 0,
         'dispatch_mode' => 2,
-        'heartbeat_idle_time'=>60,
-        'heartbeat_check_interval'=>65,
+        //'heartbeat_idle_time'=>3600,
+        //'heartbeat_check_interval'=>3650,
     ),
 );
 $publicConfig = array('cache.php', 'connection.php');

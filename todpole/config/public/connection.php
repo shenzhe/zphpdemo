@@ -5,8 +5,8 @@
             'name' => 'cr',
             'pconnect' => true,
             'host' => '127.0.0.1',
-            'port' => 16379,
+            'port' => 6379,
             'timeout' => 5,
-            'prefix' => 'zchat'
+            'prefix' => 'todpole'
         )
     );
