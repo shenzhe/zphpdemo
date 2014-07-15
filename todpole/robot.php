@@ -28,6 +28,9 @@ for ($i = 1; $i <= $num; $i++) {
     $clients[$fd] = [$id, $client];
     echo "robot {$fd} create success" . PHP_EOL;
     usleep(20000);
+    $client->send(json_encode(array(
+        'type'=>'robot'
+    )));
 }
 echo "starttime: " . date("Y-m-d H:i:s") . PHP_EOL;
 $starttime = time();
@@ -40,11 +43,12 @@ while (1) {
             echo "{$cli[0]} error" . PHP_EOL;
         } else {
             $recvData = $cli[1]->recv();
-            if(!$recvData) {
+            /*if(!$recvData) {
                 unset($clients[$index]);
                 echo "{$index} recv error" . PHP_EOL;
                 return;
-            }
+            }*/
+
 
         }
     }

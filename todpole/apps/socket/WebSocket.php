@@ -42,6 +42,7 @@ class WebSocket extends WSServer
         $this->send($fd, $data . pack("H*", '811e') . '{"type":"welcome","id":' . $uid . '}', self::OPCODE_BINARY_FRAME);
         $this->conn->addFd($fd, $uid);
         $this->conn->add($uid, $fd);
+
     }
 
     public function wsOnClose($fd)
@@ -110,6 +111,10 @@ class WebSocket extends WSServer
                     'message' => $message_data['message'],
                 );
                 return $this->sendAll($fd, json_encode($new_message));
+            case 'robot':
+                $this->conn->delChannel($uid, 'ALL');
+                return;
+
         }
     }
 
