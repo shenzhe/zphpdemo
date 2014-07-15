@@ -26,7 +26,7 @@ $config =  array(
         'heartbeat_check_interval'=>65,
     ),
 );
-$publicConfig = array('cache.php');
+$publicConfig = array('cache.php', 'connection.php');
 foreach($publicConfig as $file) {
     $file = ZPHP::getRootPath() . DS . 'config' . DS . 'public'. DS . $file;
     $config += include "{$file}";
