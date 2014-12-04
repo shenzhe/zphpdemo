@@ -1,11 +1,13 @@
 <?php
 use ZPHP\ZPHP;
 $config =  array(
-    'server_mode' => 'Socket',
+    'server_mode' => 'Http',
     'project_name' => 'zwebsocket',
     'app_path' => 'apps',
     'ctrl_path' => 'ctrl',
+    'lib_path' => ZPHP::getRootPath().DS.'..'.DS.'lib',
     'project' => array(
+        'default_ctrl_name'=>'main',
         'log_path' => 'socket',
         'static_url'=> 'http://hs.static.45117.com/',
         'app_host'=> 'zchat.45117.com',
@@ -18,6 +20,7 @@ $config =  array(
         'work_mode' => 3,
         'worker_num' => 1,
         'client_class' => 'socket\\WebSocket', //socket 回调类
+        'parse_class' => 'WebSocketChatParse', //socket 回调类
         'protocol' => 'Rpc', //socket通信数据协议
         'call_mode' => 'ZPHP', //业务处理模式
         'max_request' => 10000,
@@ -26,7 +29,7 @@ $config =  array(
         'heartbeat_check_interval'=>610,
     ),
 );
-$publicConfig = array('connection.php');
+$publicConfig = array('connection.php', 'cache.php');
 foreach($publicConfig as $file) {
     $file = ZPHP::getRootPath() . DS . 'config' . DS . 'public'. DS . $file;
     $config += include "{$file}";

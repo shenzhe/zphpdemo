@@ -8,7 +8,7 @@ $(document).ready(
 	function() {
 		if ( window.WebSocket || window.MozWebSocket) 
 		{
-			ws = new WebSocket( "ws://zchat.45117.com:8993" );
+			ws = new WebSocket( "ws://127.0.0.1:9502" );
 			/**
 			 * 连接建立时触发
 			 */
@@ -74,7 +74,7 @@ $(document).ready(
 				if( confirm( "您已退出聊天室" ))
 				{
 				//alert('您已退出聊天室');
-				location.href = 'login.html';
+				location.href = 'index.html';
 				}
 			};
 			
@@ -156,7 +156,7 @@ function showNewUser( data )
 				"<a href='javascript:selectUser("
 				+ dataObj.fd + ")'>" + "<img src='" + dataObj.avatar
 				+ "' width='50' height='50'></a></li>");
-		
+		showNewMsg('{"cmd":"fromMsg","from":0,"channel":0,"data":'+dataObj.name+' 上线了...}');
 	}
 }
 
