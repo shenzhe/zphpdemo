@@ -5,11 +5,11 @@ zchat
 
 @email: shenzhe163@gmail.com
 
-zchat 是 基于 zphp实现的聊天室，着重于zphp在 socket, redis, mysql, swoole相结合
+zchat 是 基于 swoole的http server和websocket实现的聊天室
 
 demo地址：
 ========
- http://zchat.45117.com
+ http://zchat.45117.com:9502
 
 
 需求的扩展及服务：
