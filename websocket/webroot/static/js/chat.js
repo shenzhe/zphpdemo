@@ -3,12 +3,18 @@ var client_id = 0;
 var userlist = {};
 var GET = new Object();
 GET = getRequest();
+var HOST = window.location.host;
+var PORT = window.location.port;
 
 $(document).ready(
 	function() {
 		if ( window.WebSocket || window.MozWebSocket) 
 		{
-			ws = new WebSocket( "ws://127.0.0.1:9502" );
+            if("" != PORT) {
+                ws = new WebSocket("ws://"+HOST+":"+PORT);
+            } else{
+                ws = new WebSocket("ws://"+HOST);
+            }
 			/**
 			 * 连接建立时触发
 			 */

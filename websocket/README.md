@@ -1,20 +1,26 @@
 websocket Demo运行：
 ======
+    1) git clone https://github.com/shenzhe/zphp
 
-	1) cd 程序目录
+    1) git clone https://github.com/shenzhe/zphpdemo
 
-	2) php websocket/webroot/main.php websocket 
+	3) cd zphp目录
 
-	3) 浏览器运行：http://host/login.html
+	4) php bin/swoole_http_server.php {zphpdemo完整目录}/websocket
+
+	5) 浏览器运行：http://host:9502/
 
 依赖扩展
 ====
-	https://github.com/matyhtf/php-webserver/tree/master/ext   //用来解析http头
-	
+	redis扩展
+
+依赖服务
+====
+	redis服务  (用户存放用户的基本信息)
 
 演示地址
 =====
-	http://zchat.45117.com/websocket/
+	http://zchat.45117.com:9502
 
 
 
