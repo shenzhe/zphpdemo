@@ -12,11 +12,12 @@ class WebSocketChatParse
         return $param;
     }
 
-    public function close()
+    public function close($fd)
     {
         return [
             'a'=>'chat',
-            'm'=>'offline'
+            'm'=>'offline',
+            'fd'=>$fd
         ];
     }
 } 

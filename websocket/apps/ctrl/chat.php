@@ -25,12 +25,17 @@ class chat implements IController
 
     public function message()
     {
-        if(!empty($this->params['from'])) {
+        if(!empty($this->params['channel'])) {  //私聊
             \HttpServer::$response->message(json_encode([
                 'cmd' => 'fromMsg',
                 'from' => \HttpServer::$response->fd,
                 'data' => $this->params['data'],
             ]));
+            \HttpServer::$response->message(json_encode([
+                'cmd' => 'fromMsg',
+                'from' => \HttpServer::$response->fd,
+                'data' => $this->params['data'],
+            ]), intval($this->params['to']));
         }else{
             $this->boardcast([
                 'cmd' => 'fromMsg',
@@ -56,11 +61,15 @@ class chat implements IController
             ])
         );
 
+//        echo \HttpServer::$response->fd." : ".$this->params['name']." login start".PHP_EOL;
 
-        ZCache::getInstance('Yac', ZConfig::getField('cache', 'locale'))->add(\HttpServer::$response->fd, json_encode([
+        ZCache::getInstance('Redis', ZConfig::getField('cache', 'net'))->set(\HttpServer::$response->fd, json_encode([
             'name'=>$this->params['name'],
             'avatar'=>$this->params['avatar']
         ]));
+
+//        echo ZCache::getInstance('Redis', ZConfig::getField('cache', 'net'))->get(\HttpServer::$response->fd).PHP_EOL;
+//        echo "login end".PHP_EOL;
 
     }
 
@@ -69,20 +78,25 @@ class chat implements IController
         $resMsg = array(
             'cmd' => 'getOnline',
         );
+//        echo "getOnline".PHP_EOL;
         $start_fd = 0;
         while(true)
         {
-            $conn_list = \HttpServer::$http->connection_list($start_fd, 10);
+            $conn_list = \HttpServer::$http->connection_list($start_fd, 100);
+//            var_dump($conn_list);
             if($conn_list===false or count($conn_list) === 0)
             {
-                return;
+                break;
             }
             $start_fd = end($conn_list);
             foreach($conn_list as $fd)
             {
+//                echo "list {$fd} get start".PHP_EOL;
                 $conn = \HttpServer::$http->connection_info($fd);
+//                print_r($conn);
+//                echo "list {$fd} get end".PHP_EOL;
                 if($conn['websocket_status'] > 1) {
-                    $uinfo = ZCache::getInstance('Yac', ZConfig::getField('cache', 'locale'))->get($fd);
+                    $uinfo = ZCache::getInstance('Redis', ZConfig::getField('cache', 'net'))->get($fd);
                     $uinfo = json_decode($uinfo, true);
                     $resMsg['list'][] = array(
                         'fd' => $fd,
@@ -93,26 +107,27 @@ class chat implements IController
 
             }
         }
-        $this->boardcast(json_encode($resMsg));
+//        print_r($resMsg);
+        $this->boardcast($resMsg);
     }
 
     public function offline()
     {
-        ZCache::getInstance('Yac', ZConfig::getField('cache', 'locale'))->delete(\HttpServer::$response->fd);
+//        echo 'offline start'.PHP_EOL;
+        ZCache::getInstance('Redis', ZConfig::getField('cache', 'net'))->delete($this->params['fd']);
         $this->boardcast([
             'cmd' => 'offline',
-            'fd' => \HttpServer::$response->fd,
+            'fd' => $this->params['fd'],
             'from' => 0,
-            'channal' => 0,
-            'data' => "下线了。。",
+            'channal' => 0
         ]);
+//        echo 'offline end'.PHP_EOL;
 
     }
 
 
     private function boardcast($data)
     {
-        var_dump(\HttpServer::$response);
         $data = json_encode($data);
         $start_fd = 0;
         while(true)
@@ -120,7 +135,7 @@ class chat implements IController
             $conn_list = \HttpServer::$http->connection_list($start_fd, 10);
             if($conn_list===false or count($conn_list) === 0)
             {
-                return;
+                break;
             }
             $start_fd = end($conn_list);
             foreach($conn_list as $fd)
@@ -130,7 +145,7 @@ class chat implements IController
 //                }
                 $conn = \HttpServer::$http->connection_info($fd);
                 if($conn['websocket_status'] > 1) {
-                    echo "send fd: {$fd}: {$data}" . PHP_EOL;
+//                    echo "send fd: {$fd}: {$data}" . PHP_EOL;
                     \HttpServer::$response->message($data, $fd);
                 }
             }

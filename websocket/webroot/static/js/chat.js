@@ -60,8 +60,7 @@ $(document).ready(
 				else if( cmd == 'offline' )
 				{
 					var cid = $.evalJSON( e.data ).fd;
-					delUser( cid ); 
-					showNewMsg( e.data  );	
+					delUser( cid );
 				}
 			};
 			
@@ -156,7 +155,7 @@ function showNewUser( data )
 				"<a href='javascript:selectUser("
 				+ dataObj.fd + ")'>" + "<img src='" + dataObj.avatar
 				+ "' width='50' height='50'></a></li>");
-		showNewMsg('{"cmd":"fromMsg","from":0,"channel":0,"data":'+dataObj.name+' 上线了...}');
+		showNewMsg('{"cmd":"fromMsg","from":0,"channel":0,"data":"'+dataObj.name+' 上线了..."}');
 	}
 }
 
@@ -277,6 +276,8 @@ function delUser( userid )
 {
 	$('#user_' + userid).remove();
 	$('#inroom_' + userid).remove();
+    var msg = '{"cmd":"fromMsg","from":0,"channel":0,"data":"'+userlist[userid]+' 下线了..."}';
+    showNewMsg(msg);
 	delete (userlist[userid]);
 	
 }
