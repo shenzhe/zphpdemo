@@ -10,11 +10,7 @@ $(document).ready(
 	function() {
 		if ( window.WebSocket || window.MozWebSocket) 
 		{
-            if("" != PORT) {
-                ws = new WebSocket("ws://"+HOST+":"+PORT);
-            } else{
-                ws = new WebSocket("ws://"+HOST);
-            }
+            ws = new WebSocket("ws://"+HOST);
 			/**
 			 * 连接建立时触发
 			 */
