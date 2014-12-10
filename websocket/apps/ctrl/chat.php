@@ -26,20 +26,20 @@ class chat implements IController
     public function message()
     {
         if(!empty($this->params['channel'])) {  //私聊
-            \HttpServer::$response->message(json_encode([
+            \HttpServer::$wsresponse->message(json_encode([
                 'cmd' => 'fromMsg',
-                'from' => \HttpServer::$response->fd,
+                'from' => \HttpServer::$wsresponse->fd,
                 'data' => $this->params['data'],
             ]));
-            \HttpServer::$response->message(json_encode([
+            \HttpServer::$wsresponse->message(json_encode([
                 'cmd' => 'fromMsg',
-                'from' => \HttpServer::$response->fd,
+                'from' => \HttpServer::$wsresponse->fd,
                 'data' => $this->params['data'],
             ]), intval($this->params['to']));
         }else{
             $this->boardcast([
                 'cmd' => 'fromMsg',
-                'from' => \HttpServer::$response->fd,
+                'from' => \HttpServer::$wsresponse->fd,
                 'data' => $this->params['data'],
             ]);
         }
@@ -50,25 +50,25 @@ class chat implements IController
 
         $this->boardcast([
             'cmd' => 'newUser',
-            'fd' => \HttpServer::$response->fd,
+            'fd' => \HttpServer::$wsresponse->fd,
             'name' => $this->params['name'],
             'avatar' => $this->params['avatar'],
         ]);
 
-        \HttpServer::$response->message(
+        \HttpServer::$wsresponse->message(
             json_encode([
                 'cmd' => 'login'
             ])
         );
 
-//        echo \HttpServer::$response->fd." : ".$this->params['name']." login start".PHP_EOL;
+//        echo \HttpServer::$wsresponse->fd." : ".$this->params['name']." login start".PHP_EOL;
 
-        ZCache::getInstance('Redis', ZConfig::getField('cache', 'net'))->set(\HttpServer::$response->fd, json_encode([
+        ZCache::getInstance('Redis', ZConfig::getField('cache', 'net'))->set(\HttpServer::$wsresponse->fd, json_encode([
             'name'=>$this->params['name'],
             'avatar'=>$this->params['avatar']
         ]));
 
-//        echo ZCache::getInstance('Redis', ZConfig::getField('cache', 'net'))->get(\HttpServer::$response->fd).PHP_EOL;
+//        echo ZCache::getInstance('Redis', ZConfig::getField('cache', 'net'))->get(\HttpServer::$wsresponse->fd).PHP_EOL;
 //        echo "login end".PHP_EOL;
 
     }
@@ -140,13 +140,13 @@ class chat implements IController
             $start_fd = end($conn_list);
             foreach($conn_list as $fd)
             {
-//                if($fd == \HttpServer::$response->fd) {
+//                if($fd == \HttpServer::$wsresponse->fd) {
 //                    continue;
 //                }
                 $conn = \HttpServer::$http->connection_info($fd);
                 if($conn['websocket_status'] > 1) {
 //                    echo "send fd: {$fd}: {$data}" . PHP_EOL;
-                    \HttpServer::$response->message($data, $fd);
+                    \HttpServer::$wsresponse->message($data, $fd);
                 }
             }
         }
