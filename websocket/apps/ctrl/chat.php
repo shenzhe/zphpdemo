@@ -120,13 +120,13 @@ class chat implements IController
             'fd' => $this->params['fd'],
             'from' => 0,
             'channal' => 0
-        ]);
+        ], false);
 //        echo 'offline end'.PHP_EOL;
 
     }
 
 
-    private function boardcast($data)
+    private function boardcast($data, $self=true)
     {
         $data = json_encode($data);
         $start_fd = 0;
@@ -140,9 +140,9 @@ class chat implements IController
             $start_fd = end($conn_list);
             foreach($conn_list as $fd)
             {
-//                if($fd == \HttpServer::$wsresponse->fd) {
-//                    continue;
-//                }
+                if(!$self && $fd == \HttpServer::$wsresponse->fd) {
+                    continue;
+                }
                 $conn = \HttpServer::$http->connection_info($fd);
                 if($conn['websocket_status'] > 1) {
 //                    echo "send fd: {$fd}: {$data}" . PHP_EOL;
