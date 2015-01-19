@@ -24,15 +24,9 @@ class main implements IController
     public function main()
     {
         $project = ZConfig::getField('project', 'name', 'zphp');
-        $data = $project." runing!\n";
-        $params = $this->_server->getParams();
-        if(!empty($params)) {
-            foreach($params as $key=>$val) {
-                $data.= "key:{$key}=>{$val}\n";
-            }
-        }
-        $this->_server->setViewMode('String');
-        return $data;
+        return [
+            'message'=>'very good'
+        ];
     }
 }
 

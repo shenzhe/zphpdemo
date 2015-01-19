@@ -3,21 +3,28 @@
 
 class WebSocketChatParse
 {
-    public function parse($data)
+    public function parse($zphp, $data)
     {
         //{"cmd":"message","from":0,"channal":0,"data":"adfadf"}
         $param = json_decode($data, true);
         $param['a'] = 'chat';
         $param['m'] = $param['cmd'];
-        return $param;
+        $_REQUEST = $param;
+        $zphp->run();
     }
 
-    public function close($fd)
+    public function open($zphp, $fd)
     {
-        return [
+        return;
+    }
+
+    public function close($zphp , $fd)
+    {
+        $_REQUEST =  [
             'a'=>'chat',
             'm'=>'offline',
             'fd'=>$fd
         ];
+        $zphp->run();
     }
 } 

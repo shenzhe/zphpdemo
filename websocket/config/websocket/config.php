@@ -1,7 +1,7 @@
 <?php
 use ZPHP\ZPHP;
 $config =  array(
-    'server_mode' => 'Http',
+    'server_mode' => 'Server\WebSocket',
     'project_name' => 'zwebsocket',
     'app_path' => 'apps',
     'ctrl_path' => 'ctrl',
@@ -10,7 +10,7 @@ $config =  array(
         'default_ctrl_name'=>'main',
         'log_path' => 'socket',
         'static_url'=> 'http://hs.static.45117.com/',
-        'app_host'=> 'zchat.45117.com',
+        'app_host'=> $_SERVER['HTTP_HOST'],
     ),
     'socket' => array(
         'host' => '0.0.0.0', //socket 监听ip
