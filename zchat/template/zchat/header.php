@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="zchat">
     <meta name="author" content="shenzhe">
-    <link rel="shortcut icon" href="<?php echo $static_url;?>ico/favicon.png">
     <title>ZChat Demo</title>
     <!-- Bootstrap core CSS -->
     <link href="<?php echo $static_url;?>css/bootstrap.css" rel="stylesheet">
@@ -27,5 +26,5 @@
     <![endif]-->
 </head>
 <body>
-    <a href="https://github.com/shenzhe/zchat" target="_blank">
+    <a href="https://github.com/shenzhe/zphpdemo" target="_blank">
     <img style="position: absolute; top: 0; right: 0; border: 0; z-index:9999;" src="http://www.swoole.com/static/image/forkme_right_orange_ff7600.png" alt="Fork me on GitHub" /></a>

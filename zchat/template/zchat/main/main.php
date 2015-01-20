@@ -1,4 +1,4 @@
-<?php include ('header.php');?>
+<?php include(TPL_PATH.'header.php');?>
 <div class="container">
     <div>
         <div class="user_list">
@@ -52,4 +52,4 @@
         [<?php echo $uid;?>, '<?php echo $token;?>']
     );
 </script>
-<?php include ('footer.php');?>
+<?php include(TPL_PATH.'footer.php');?>

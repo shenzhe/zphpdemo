@@ -1,25 +1,12 @@
 <?php
 namespace ctrl;
+use service\Base;
 use ZPHP\Controller\IController;
 use ZPHP\Core\Config as ZConfig;
+use common;
 
-class login implements IController
+class login extends Base
 {
-    private $_server;
-    public function setServer($server)
-    {
-        $this->_server = $server;
-    }
-
-    public function _before()
-    {
-        return true;
-    }
-
-    public function _after()
-    {
-        //
-    }
 
     public function check()
     {
@@ -29,6 +16,22 @@ class login implements IController
     public function reg()
     {
         return [];
+    }
+
+    public function savereg()
+    {
+        $username = $this->getString($this->params, 'username');
+        $password = $this->getString($this->params, 'password');
+        $icon = $this->getString($this->params, 'icon', 'noface.jpg');
+        $service = common\loadClass::getService('User');
+        $result = $service->addUser($username, $password, $icon);
+        if($result) {
+            return common\Utils::jump("main/main", "main", array(
+                "msg"=>"注册成功"
+            ));
+        }
+
+        return common\Utils::showMsg("注册失败");
     }
 }
 

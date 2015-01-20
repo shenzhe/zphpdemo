@@ -1,9 +1,8 @@
 <?php
 
-namespace ctrl\main;
+namespace ctrl;
 
 use common,
-    ctrl\Base,
     ZPHP\Core\Config as ZConfig;
 
 class main extends Base
@@ -22,6 +21,13 @@ class main extends Base
             );
         }
 
+        return common\Utils::jump("main", "login", array(
+            "msg"=>"需要登录"
+        ));
+    }
+
+    public function login()
+    {
         return array(
             'static_url'=>ZConfig::getField('project', 'static_url'),
         );
@@ -36,7 +42,7 @@ class main extends Base
 
         if(!empty($userInfo)) {
             $token = common\Utils::setToken($userInfo->id);
-            return common\Utils::jump("main/main", "main", array(
+            return common\Utils::jump("main", "main", array(
                 'uid'=>$userInfo->id,
                 'token'=>$token,
             ));
@@ -60,7 +66,7 @@ class main extends Base
         $service = common\loadClass::getService('User');
         $result = $service->addUser($username, $password, $icon);
         if($result) {
-            return common\Utils::jump("main/main", "main", array(
+            return common\Utils::jump("main", "main", array(
                 "msg"=>"注册成功"
             ));
         }
