@@ -13,15 +13,15 @@ if (!function_exists('is_mobile')) {
 <head>
     <meta charset="utf-8">
     <title>zphp + swoole小蝌蚪互动聊天室</title>
-    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="<?=STATIC_URL?>css/main.css"/>
     <meta name="viewport"
           content="width=device-width; initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=0;"/>
     <meta name="apple-mobile-web-app-capable" content="YES">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" href="<?=STATIC_URL?>images/apple-touch-icon.png"/>
     <meta name="title" content="zphp-swoole-todpole!"/>
     <meta name="description" content="zphp+swoole + HTML5+WebSocket +PHP socket 广播 小蝌蚪交互游戏程序 ，坐标实时推送、实时聊天等"/>
-    <link rel="image_src" href="/images/fb-image.jpg"
+    <link rel="image_src" href="<?=STATIC_URL?>images/fb-image.jpg"
     / >
 </head>
 <body>
@@ -43,7 +43,7 @@ if (!function_exists('is_mobile')) {
         <aside id="info">
             <section id="share">
                 <a rel="external" href="http://github.com/shenzhe/zphpdemo" title="zphp-todpole at GitHub">源代码：<img
-                        src="css/images/github.png" alt="fork on github"></a>
+                        src="<?=STATIC_URL?>css/images/github.png" alt="fork on github"></a>
                 &nbsp;&nbsp;
             </section>
             <section id="wtf">
@@ -86,27 +86,27 @@ if (!function_exists('is_mobile')) {
 
 </div>
 
-<script src="/js/lib/parseUri.js"></script>
-<script src="/js/lib/modernizr-1.5.min.js"></script>
-<script src="/js/jquery.min.js"></script>
-<script src="/js/lib/Stats.js"></script>
+<script src="<?=STATIC_URL?>/js/lib/parseUri.js"></script>
+<script src="<?=STATIC_URL?>/js/lib/modernizr-1.5.min.js"></script>
+<script src="<?=STATIC_URL?>/js/jquery.min.js"></script>
+<script src="<?=STATIC_URL?>/js/lib/Stats.js"></script>
 
-<script src="/js/App.js"></script>
-<script src="/js/Model.js"></script>
-<script src="/js/Settings.js"></script>
-<script src="/js/Keys.js"></script>
-<script src="/js/WebSocketService.js"></script>
-<script src="/js/Camera.js"></script>
+<script src="<?=STATIC_URL?>/js/App.js"></script>
+<script src="<?=STATIC_URL?>/js/Model.js"></script>
+<script src="<?=STATIC_URL?>/js/Settings.js"></script>
+<script src="<?=STATIC_URL?>/js/Keys.js"></script>
+<script src="<?=STATIC_URL?>/js/WebSocketService.js"></script>
+<script src="<?=STATIC_URL?>/js/Camera.js"></script>
 
-<script src="/js/Tadpole.js"></script>
-<script src="/js/TadpoleTail.js"></script>
+<script src="<?=STATIC_URL?>/js/Tadpole.js"></script>
+<script src="<?=STATIC_URL?>/js/TadpoleTail.js"></script>
 
-<script src="/js/Message.js"></script>
-<script src="/js/WaterParticle.js"></script>
-<script src="/js/Arrow.js"></script>
-<script src="/js/formControls.js"></script>
+<script src="<?=STATIC_URL?>/js/Message.js"></script>
+<script src="<?=STATIC_URL?>/js/WaterParticle.js"></script>
+<script src="<?=STATIC_URL?>/js/Arrow.js"></script>
+<script src="<?=STATIC_URL?>/js/formControls.js"></script>
 
-<script src="/js/main.js"></script>
+<script src="<?=STATIC_URL?>/js/main.js"></script>
 
 </body>
 </html>

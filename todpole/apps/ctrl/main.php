@@ -6,20 +6,6 @@ use ZPHP\Controller\IController;
 
 class main implements IController
 {
-	protected $server;
-    protected $params = array();
-
-    public function setServer($server)
-    {
-        $this->server = $server;
-        $this->params = $server->getParams();
-    }
-
-    public function getServer()
-    {
-        return $this->server;
-    }
-
     public function _before()
     {
         return true;

@@ -1,13 +1,13 @@
 zphp + swoole 蝌蚪游戏demo：
 ======
 
+    0) git clone 到服务器
+
 	1) cd 程序目录
 
 	2) php todpole/webroot/main.php websocket 
 
-	3) web目录指定到 webroot
-
-	4) 浏览器运行：http://host/
+	3) 运行： http://ip:8992
 
 在线demo:
 ======
@@ -15,7 +15,7 @@ zphp + swoole 蝌蚪游戏demo：
 
 依赖扩展
 ====
-	https://github.com/matyhtf/php-webserver/tree/master/ext   //用来解析http头
+	swoole扩展  http://github.com/swoole/swoole-src
 	
 
 
