@@ -11,7 +11,7 @@ zphp + swoole 蝌蚪游戏demo：
 
 在线demo:
 ======
-	http://todpole.zphp.45117.com/
+	http://todpole.zphp.45117.com:8992/
 
 依赖扩展
 ====
