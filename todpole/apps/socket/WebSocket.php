@@ -48,6 +48,15 @@ class WebSocket extends ZSwooleWebSocket
         ], 0);
     }
 
+    public function onClose()
+    {
+        list($server, $fd) = func_get_args();
+        $server->task([
+            'cmd' => 'close',
+            'fd' => $fd
+        ]);
+    }
+
     public function onRequest($request, $response)
     {
         $filename = ZPHP::getRootPath() . DS . 'webroot' . $request->server['path_info'];
@@ -163,7 +172,7 @@ class WebSocket extends ZSwooleWebSocket
     {
         print_r($this->flist);
         foreach ($this->flist as $fd) {
-            echo "send {$fd}: {$data}".PHP_EOL;
+            echo "send {$fd}: {$data}" . PHP_EOL;
             $ret = $server->push($fd, $data);
             if (!$ret) {
                 $this->log("{$fd} send error");
