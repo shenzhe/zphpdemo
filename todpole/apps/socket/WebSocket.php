@@ -50,11 +50,12 @@ class WebSocket extends ZSwooleWebSocket
 
     public function onClose()
     {
-        list($server, $fd) = func_get_args();
+        list($server, $fd, $fromId) = func_get_args();
+        $this->log("{$fd} close".PHP_EOL);
         $server->task([
             'cmd' => 'close',
             'fd' => $fd
-        ]);
+        ], 0);
     }
 
     public function onRequest($request, $response)
@@ -120,9 +121,13 @@ class WebSocket extends ZSwooleWebSocket
                 $server->push($data['fd'], '{"type":"welcome","id":' . $data['uid'] . '}');
                 break;
             case 'close':
+                print_r($this->ulist);
+                print_r($this->flist);
                 $uid = $this->ulist[$data['fd']];
                 unset($this->ulist[$data['fd']]);
                 unset($this->flist[$uid]);
+                print_r($this->ulist);
+                print_r($this->flist);
                 $this->sendAll($server, json_encode(array('type' => 'closed', 'id' => $uid)));
                 break;
             case 'message':
@@ -170,9 +175,8 @@ class WebSocket extends ZSwooleWebSocket
 
     public function sendAll($server, $data)
     {
-        print_r($this->flist);
         foreach ($this->flist as $fd) {
-            echo "send {$fd}: {$data}" . PHP_EOL;
+            $this->log("send {$fd}: {$data}");
             $ret = $server->push($fd, $data);
             if (!$ret) {
                 $this->log("{$fd} send error");
