@@ -51,7 +51,7 @@ class WebSocket extends ZSwooleWebSocket
     public function onClose()
     {
         list($server, $fd, $fromId) = func_get_args();
-        $this->log("{$fd} close".PHP_EOL);
+        $this->log("{$fd} close" . PHP_EOL);
         $server->task([
             'cmd' => 'close',
             'fd' => $fd
@@ -114,6 +114,14 @@ class WebSocket extends ZSwooleWebSocket
 
     public function onTask($server, $taskId, $fromId, $data)
     {
+//        $apn = Config::getField('project', 'ctrl_name', 'a');
+//        $mpn = Config::getField('project', 'method_name', 'm');
+//        Request::parse([
+//            $apn => 'todpole',
+//            $mpn => $data['cmd'],
+//            'data' => $data
+//        ]);
+//        ZRoute::route();
         switch ($data['cmd']) {
             case 'open':
                 $this->ulist[$data['fd']] = $data['uid'];
@@ -121,13 +129,9 @@ class WebSocket extends ZSwooleWebSocket
                 $server->push($data['fd'], '{"type":"welcome","id":' . $data['uid'] . '}');
                 break;
             case 'close':
-                print_r($this->ulist);
-                print_r($this->flist);
                 $uid = $this->ulist[$data['fd']];
                 unset($this->ulist[$data['fd']]);
                 unset($this->flist[$uid]);
-                print_r($this->ulist);
-                print_r($this->flist);
                 $this->sendAll($server, json_encode(array('type' => 'closed', 'id' => $uid)));
                 break;
             case 'message':
@@ -200,6 +204,12 @@ class WebSocket extends ZSwooleWebSocket
         } else {
             return 'text/html';
         }
+    }
+
+    public function onWorkerStart($server, $workerId)
+    {
+        parent::onWorkerStart($server, $workerId);
+        Request::setSocket($server);
     }
 
 }

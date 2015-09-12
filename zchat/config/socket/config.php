@@ -25,7 +25,7 @@ $config =  array(
         'dispatch_mode' => 2,
     ),
 );
-$publicConfig = array('connection.php', 'cache.php', 'pdo.php');
+$publicConfig = array('pdo.php');
 foreach($publicConfig as $file) {
     $file = ZPHP::getRootPath() . DS . 'config' . DS . 'public'. DS . $file;
     $config += include "{$file}";

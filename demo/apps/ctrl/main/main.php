@@ -27,7 +27,7 @@ class main implements IController
                 $data.= "key:{$key}=>{$val}\n";
             }
         }
-        return ['data'=>$data, 'cc'=>'cc', '_view_mode'=>'Json'];
+        return ['data'=>['data'=>['zphp'=>$data]]];
     }
 }
 

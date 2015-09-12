@@ -1,8 +1,6 @@
 <?php
 use ZPHP\Socket\Adapter\Swoole;
-use ZPHP\ZPHP;
 
-define('STATIC_URL', '/static/');
 return array(
     'server_mode' => 'Socket',
     'project_name' => 'zphpdemo-todpole',
@@ -11,7 +9,7 @@ return array(
     'project' => array(
         'log_path' => 'socket',
         'default_ctrl_name' => 'main',
-        'static_url' => STATIC_URL,
+        'static_url' => '/static/',
     ),
     'socket' => array(
         'host' => '0.0.0.0',                          //socket 监听ip

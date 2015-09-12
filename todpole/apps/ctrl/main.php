@@ -3,6 +3,7 @@ namespace ctrl;
 
 use common;
 use ZPHP\Controller\IController;
+use ZPHP\Core\Config as ZConfig;
 
 class main implements IController
 {
@@ -21,7 +22,9 @@ class main implements IController
      */
     public function main()
     {
-        return array();
+        return [
+            'static_url'=>ZConfig::getField('project', 'static_url'),
+        ];
     }
 
 

@@ -17,3 +17,5 @@
     swoole websocket 模式:
                 1) php 项目目录/webroot/main.php socket_ws
                 2) js连接： ws://ip:port
+
+
