@@ -27,18 +27,27 @@ class session implements IController
 
         ];
 
-        return $_SESSION;
+        return [
+            '_view_mode'=>'Json',
+            'set' => 'ok'
+        ];
     }
 
     public function get()
     {
-        return $_SESSION;
+        return [
+            '_view_mode'=>'Json',
+            'session' => $_SESSION
+        ];;
     }
 
     public function delete()
     {
         unset($_SESSION);
-        return 'delete ok';
+        return [
+            '_view_mode'=>'Json',
+            'delete' => 'ok'
+        ];
     }
 }
 
