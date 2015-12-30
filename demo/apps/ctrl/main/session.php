@@ -28,16 +28,20 @@ class session implements IController
         ];
 
         print_r($_SESSION);
+
+        return null;
     }
 
     public function get()
     {
         print_r($_SESSION);
+        return null;
     }
 
     public function delete()
     {
         unset($_SESSION);
+        return null;
     }
 }
 
