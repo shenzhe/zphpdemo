@@ -20,14 +20,14 @@ class main implements IController
     public function main()
     {
         $project = Config::getField('project', 'name', 'zphp');
-        $data = $project." runing!\n";
+        $data = $project . " runing!\n";
         $params = Request::getParams();
-        if(!empty($params)) {
-            foreach($params as $key=>$val) {
-                $data.= "key:{$key}=>{$val}\n";
+        if (!empty($params)) {
+            foreach ($params as $key => $val) {
+                $data .= "key:{$key}=>{$val}\n";
             }
         }
-        return ['data'=>['data'=>['zphp'=>$data]]];
+        return ['data' => ['data' => ['zphp' => $data]]];
     }
 }
 

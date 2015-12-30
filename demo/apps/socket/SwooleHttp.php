@@ -22,7 +22,6 @@ class SwooleHttp extends ZSwooleHttp
             $param += $request->post;
         }
         Request::parse($param);
-        Response::setResponse($response);
         try {
             $result = ZRoute::route();
         } catch (\Exception $e) {
@@ -36,7 +35,6 @@ class SwooleHttp extends ZSwooleHttp
     public function onWorkerStart($server, $workerId)
     {
         parent::onWorkerStart($server, $workerId);
-        Request::setHttpServer(1);
     }
 
 }
