@@ -20,5 +20,18 @@ return array(
         'max_request' => 0,                            //单个进程最大处理请求数
         'debug_mode' => 1,                                  //打开调试模式
     ),
+    'session'=> array(
+        'adapter' => 'Redis',
+        'name' => 'sso',
+        'pconnect' => true,
+        'host' => '127.0.0.1',
+        'port' => 6379,
+        'timeout' => 0,
+        'session_name'=>'ZPHP_SID',
+        'cache_expire' => 20160,
+        'path' => '/',
+        'serure'=>false,
+        'httponly'=>true,
+    ),
 
 );
