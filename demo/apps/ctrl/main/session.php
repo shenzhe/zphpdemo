@@ -1,9 +1,7 @@
 <?php
 namespace ctrl\main;
 use ZPHP\Controller\IController,
-    ZPHP\Core\Config,
     ZPHP\View;
-use ZPHP\Protocol\Request;
 use ZPHP\Session\Factory as ZSession;
 
 class session implements IController
