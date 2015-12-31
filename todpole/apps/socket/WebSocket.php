@@ -114,14 +114,6 @@ class WebSocket extends ZSwooleWebSocket
 
     public function onTask($server, $taskId, $fromId, $data)
     {
-//        $apn = Config::getField('project', 'ctrl_name', 'a');
-//        $mpn = Config::getField('project', 'method_name', 'm');
-//        Request::parse([
-//            $apn => 'todpole',
-//            $mpn => $data['cmd'],
-//            'data' => $data
-//        ]);
-//        ZRoute::route();
         switch ($data['cmd']) {
             case 'open':
                 $this->ulist[$data['fd']] = $data['uid'];
@@ -209,7 +201,6 @@ class WebSocket extends ZSwooleWebSocket
     public function onWorkerStart($server, $workerId)
     {
         parent::onWorkerStart($server, $workerId);
-        Request::setSocket($server);
     }
 
 }
