@@ -24,6 +24,8 @@ var chatClient = {
     renum: 2,
     hb: 0,
     uinfo:[],
+    msgEof : '##||##',
+    buffer: '',
     cb: {
         connect: function (success, data) {
             console.log("server connect, success:" + success + " data:" + data);
@@ -66,13 +68,19 @@ var chatClient = {
     },
 
     send: function (data) {
-        this.socket.write(JSON.stringify(data));
-        return this.cb.send.call(this, JSON.stringify(data));
+        this.socket.write(JSON.stringify(data) + chatClient.msgEof);
+        return this.cb.send.call(this, JSON.stringify(data) + chatClient.msgEof);
     },
 
     receive: function (content) {
         console.log("receive from server: "+content);
-        return chatClient.cb.receive.call(this, JSON.parse(content));
+        var tmpArr = content.split(chatClient.msgEof);
+        for(var key in tmpArr) {
+            if(tmpArr[key].length > 0) {
+                chatClient.cb.receive.call(this, JSON.parse(tmpArr[key]));
+            }
+        }
+
     },
 
     close: function () {
@@ -205,7 +213,6 @@ function parseOl() {
             shtml += '<option value="'+key+'">'+chatClient.olList[key][1]+'</option>';
         }
         html += '<p id="ol_'+key+'">'+chatClient.olList[key][1]+'</p>';
-
     }
     $("#sendTo").html(shtml);
     $('#ollist').html(html);

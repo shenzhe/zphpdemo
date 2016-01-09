@@ -11,6 +11,7 @@ use ZPHP\Core\Config as ZConfig,
     ZPHP\Cache\Factory as ZCache,
     ZPHP\Common\Route as ZRoute,
     ZPHP\Conn\Factory as ZConn;
+use ZPHP\Protocol\Request;
 
 
 class Utils
@@ -40,30 +41,41 @@ class Utils
         throw new \Exception("token set error", ERROR::TOKEN_ERROR);
     }
 
+    public static function getViewMode()
+    {
+        if(Request::isLongServer()) {
+            return ZConfig::getField('project', 'view_mode', 'Json');
+        }
+        if(\ZPHP\Common\Utils::isAjax()) {
+            return 'Json';
+        }
+        return 'Php';
+    }
+
     public static function jump($action, $method, $params)
     {
-        $url = self::makeUrl($action, $method, $params);
+        $url = ZRoute::makeUrl($action, $method, $params);
         return array(
-            '_view_mode'=>'Php',
+            '_view_mode'=> self::getViewMode(),
             '_tpl_file'=>'jump.php',
             'url'=>$url,
             'static_url'=>ZConfig::getField('project', 'static_url'),
         );
     }
 
+    public static function makeUrl($action, $method, $params)
+    {
+        return ZRoute::makeUrl($action, $method, $params);
+    }
+
     public static function showMsg($msg)
     {
         return array(
-            '_view_mode'=>'Php',
+            '_view_mode'=>self::getViewMode(),
             '_tpl_file'=>'error.php',
             'msg'=>$msg,
             'static_url'=>ZConfig::getField('project', 'static_url'),
         );
-    }
-
-    public static function makeUrl($action, $method, $params=array())
-    {
-        return ZRoute::makeUrl($action, $method, $params);
     }
 
     public static function online($channel='ALL')

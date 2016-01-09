@@ -15,11 +15,11 @@ demo地址：
 需求的扩展及服务：
 =========
 
-1) swoole: https://github.com/matyhtf/swoole
+1) swoole: https://github.com/swoole/swoole-src
 
-2:redis-storage: http://github.com/shenzhe/redis-storage
+2:redis: http://redis.io
 
-3: phpredis: http://github.com/shenzhe/phpredis
+3: phpredis: http://github.com/phpredis/phpredis
 
 运行：
 ======
@@ -30,7 +30,7 @@ demo地址：
 
 3) php zchat/webroot/main.php socket    //zchat socket服务
 
-4) cache,conn需要redis支持 (可根据你启动的redis的host的port去更改config/public目录下cache.php和conn.php上相对应的配置)
+4) cache,conn需要redis支持 (可根据你启动的redis的host的port去更改config/public目录下cache.php和connedtion.php上相对应的配置)
 
 5）导入database下的sql         (config/public目录下pdo是相对应的配置)
 

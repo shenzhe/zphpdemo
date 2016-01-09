@@ -3,8 +3,8 @@
 namespace ctrl;
 
 use ZPHP\Controller\IController,
-    ZPHP\Core\Config as ZConfig,
     common;
+use ZPHP\Protocol\Request;
 
 
 class Base implements IController
@@ -12,34 +12,15 @@ class Base implements IController
     protected $server;
     protected $params = array();
 
-    public function setServer($server)
-    {
-        $this->server = $server;
-        $this->params = $server->getParams();
-    }
-
-    public function getServer()
-    {
-        return $this->server;
-    }
-
     public function _before()
     {
-        $ehConfig = ZConfig::getField('project', 'exception_handler');
-        if (!empty($ehConfig)) {
-            \set_exception_handler($ehConfig);
-        }
+        $this->params = Request::getParams();
         return true;
     }
 
     public function _after()
     {
-        common\loadClass::getDao('User')->closeDb();
-    }
-
-    public function getParams()
-    {
-        return $this->params;
+        //common\loadClass::getDao('User')->closeDb();
     }
 
     protected function getInteger(array $params, $key, $default = null, $abs = true, $notEmpty = false)

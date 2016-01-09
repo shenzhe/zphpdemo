@@ -2,12 +2,14 @@
 
 namespace dao;
 
-use ZPHP\Core\Config as ZConfig,
-    ZPHP\Db\Pdo as ZPdo;
+use ZPHP\Db\Pdo as ZPdo;
 
 abstract class Base
 {
     private $entity;
+    /**
+     * @var ZPdo
+     */
     private $_db = null;
 
     public function __construct($entity)
@@ -17,13 +19,8 @@ abstract class Base
 
     public function useDb()
     {
-        if (empty($this->_db)) {
-            $config = ZConfig::get('pdo');
-            $this->_db = new ZPdo($config, $this->entity, $config['dbname']);
-            $this->_db->setClassName($this->entity);
-        } else {
-            $this->_db->checkPing();
-        }
+        $this->_db =  ZPdo::getInstance();
+        $this->_db->setClassName($this->entity);
         return $this->_db;
     }
 

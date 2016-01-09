@@ -1,6 +1,8 @@
 <?php
 use ZPHP\ZPHP;
 define('NOW_TIME', isset($_SERVER['REQUEST_TIME']) ? $_SERVER['REQUEST_TIME'] : time());
+define('TPL_PATH', ZPHP::getRootPath() . DS  . 'template'. DS . 'zchat' . DS);
+define('STATIC_URL', '/static/');
 $config =  array(
     'server_mode' => 'Http',
     'project_name' => 'zchat',
@@ -8,9 +10,10 @@ $config =  array(
     'ctrl_path' => 'ctrl',
     'project' => array(
         'log_path' => 'http',
-        'static_url' => '/static/',
-        'tpl_path'=> ZPHP::getRootPath() . DS  . 'template'. DS . 'zchat' . DS,
-        'view_mode'=> 'Json',
+        'default_ctrl_name'=>'main',
+        'static_url' => STATIC_URL,
+        'tpl_path'=> TPL_PATH,
+        'view_mode'=> 'Php',
         'app_host'=> $_SERVER['HTTP_HOST']
     ),
 );
